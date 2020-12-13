@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgresql:
+    # image: postgres:11
+    build: .
+    image: keikeikei/postgresql11-on-centos7:20201210
+    container_name: postgresql-server
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres/data:/var/lib/pgsql/11/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+    hostname: postgres
+    restart: always
+    user: root
+    # user: postgres
+    privileged: true # https://qiita.com/mikene_koko/items/4c71c969f55e3fe24190
+    command: /sbin/init
+  pgadmin4:
+    build: .
+    image: dpage/pgadmin4:3.3
+    container_name: pgadmin4-admin
+    ports:
+      - 80:80
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin/storage
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root
+      PGADMIN_DEFAULT_PASSWORD: root
+    hostname: pgadmin4
+    restart: always
+    privileged: true
+    command: /sbin/init
