@@ -1,6 +1,8 @@
 version: '3.8'
 
 services:
+  railsapi:
+    build: .
   postgresql:
     # image: postgres:11
     build: .
