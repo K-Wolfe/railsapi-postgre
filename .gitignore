@@ -1,7 +1,10 @@
 docker_memo.md
 git_memo.md
 postgre_memo.md
+ruby_memo.md
 /postgres/
+/nginx/
+
 
 #### Ruby on rails items to ignore
 *.rbc
